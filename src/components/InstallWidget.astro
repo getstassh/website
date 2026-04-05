@@ -9,18 +9,19 @@ const installMethods = [
   {
     key: "curl",
     label: "curl",
-    command: "curl -fsSL /install.sh | sh",
+    command: "curl -fsSL https://stassh.bylazar.com/install.sh | sh",
   },
   {
     key: "cargo",
     label: "cargo",
-    command: "cargo install",
+    command:
+      "cargo install --git https://github.com/getstassh/stassh stassh --locked",
   },
 
   {
     key: "github",
     label: "github",
-    command: "git clone https://github.com/getstassh/stassh.git",
+    command: "https://github.com/getstassh/stassh/releases/latest",
   },
 ]
 
@@ -106,9 +107,6 @@ const initialMethod = installMethods[0]
       const methods = JSON.parse(methodsNode.textContent || "[]")
       let copyTimeout
 
-      const syncCurlCommand = (command) =>
-        command.replace("/install.sh", `${window.location.origin}/install.sh`)
-
       const renderMethod = (methodKey) => {
         const nextMethod = methods.find((method) => method.key === methodKey)
 
@@ -116,10 +114,18 @@ const initialMethod = installMethods[0]
           return
         }
 
-        commandNode.textContent =
-          nextMethod.key === "curl"
-            ? syncCurlCommand(nextMethod.command)
-            : nextMethod.command
+        commandNode.textContent = nextMethod.command
+
+        if (methodKey == "github") {
+          const link = document.createElement("a")
+          link.classList.add("install-widget__release-link")
+          link.href = nextMethod.command
+          link.target = "_blank"
+          link.rel = "noopener noreferrer"
+          link.textContent = nextMethod.command
+          commandNode.textContent = ""
+          commandNode.appendChild(link)
+        }
 
         tabs.forEach((tab) => {
           tab.setAttribute(

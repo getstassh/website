@@ -347,9 +347,12 @@ a.button {
 .install-widget__header,
 .install-widget__surface {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.install-widget__header {
+  justify-content: space-between;
 }
 
 .install-widget__tabs {
@@ -386,6 +389,17 @@ a.button {
   color: var(--amber);
 }
 
+.install-widget__release-link {
+  white-space: nowrap;
+}
+
+.install-widget__release-link:hover,
+.install-widget__release-link:focus-visible {
+  background: rgba(227, 144, 62, 0.14);
+  border-color: rgba(227, 144, 62, 0.8);
+  color: var(--amber);
+}
+
 .install-widget__tab:hover,
 .install-widget__tab:focus-visible,
 .install-widget__copy:hover,
@@ -413,6 +427,10 @@ a.button {
   background: rgba(16, 20, 24, 0.84);
   white-space: nowrap;
   text-align: left;
+}
+
+.install-widget__command:empty {
+  display: none;
 }
 
 .install-widget__copy {
