@@ -2,4 +2,4 @@
 
 set -eu
 
-exec sh -c 'curl -fsSL https://raw.githubusercontent.com/getstassh/stassh/main/install.sh | sh'
+exec sh -c 'curl -fsSL https://raw.githubusercontent.com/getstassh/stassh/refs/heads/main/install.sh | sh'

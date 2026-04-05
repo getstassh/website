@@ -13,7 +13,7 @@ Marketing site for Stassh, a local-first SSH TUI.
 
 ## Install Flow
 
-- `curl -fsSL https://getstassh.dev/install.sh | sh`
+- `curl -fsSL https://stassh.bylazar.com/install.sh | sh`
 - `cargo install --git https://github.com/getstassh/stassh stassh --locked`
 
 The hosted `install.sh` proxies to the current GitHub raw installer.
