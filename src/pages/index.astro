@@ -1,0 +1,309 @@
+---
+import icons from "lucide-static"
+import { siGithub } from "simple-icons"
+import Icon from "../components/Icon.astro"
+import InstallWidget from "../components/InstallWidget.astro"
+import SectionHeading from "../components/SectionHeading.astro"
+import ShellFrame from "../components/ShellFrame.astro"
+import Layout from "../layouts/Layout.astro"
+
+const {
+  SquareTerminal,
+  ShieldCheck,
+  Keyboard,
+  LockKeyhole,
+  Fingerprint,
+  Layers3,
+  Radar,
+  MonitorSmartphone,
+  House,
+} = icons
+
+const githubIcon = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><title>${siGithub.title}</title><path d="${siGithub.path}"/></svg>`
+
+const screenshots = [
+  {
+    src: "/imgs/dashboard.png",
+    alt: "Stassh dashboard overview",
+    title: "Dashboard overview",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#161b21",
+    caption:
+      "Scan host state, auth mode, and readiness from the dashboard before opening a connection.",
+  },
+  {
+    src: "/imgs/dashboard-with-add-host-popup.png",
+    alt: "Stassh dashboard with add host popup open",
+    title: "Add hosts in place",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#161b21",
+    caption:
+      "Create a new target with support for both key and password authentication.",
+  },
+  {
+    src: "/imgs/host-key-verification-popup.png",
+    alt: "Stassh host key verification popup",
+    title: "Verify trust explicitly",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#0a0c0e",
+    caption:
+      "New or changed host fingerprints have to be verified before trust is stored locally.",
+  },
+  {
+    src: "/imgs/opened-connection-with-quick-switcher-popup.png",
+    alt: "Stassh live SSH connection with quick switcher popup",
+    title: "Jump between sessions",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#0a0c0e",
+    caption:
+      "Keep multiple connections opened and switch context with no friction.",
+  },
+  {
+    src: "/imgs/opened-connection.png",
+    alt: "Stassh live SSH connection view",
+    title: "Stay in the shell",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#0a0c0e",
+    caption:
+      "Interactive sessions keep resize, paste, and disconnect handling inside the app.",
+  },
+  {
+    src: "/imgs/page-with-logo-that-asks-for-my-password.png",
+    alt: "Stassh password prompt screen with logo",
+    title: "Protected local access",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#101418",
+    caption:
+      "All sensitive data is encrypted and stored locally, preventing exposed credentials.",
+  },
+  {
+    src: "/imgs/waiting-for-connection-page.png",
+    alt: "Stassh waiting for connection screen",
+    title: "Connection status feedback",
+    cropInline: 6,
+    cropBlock: 14,
+    cardBackground: "#161b21",
+    caption:
+      "The interface stays explicit about in-flight connection state instead of hiding it.",
+  },
+]
+---
+
+<Layout
+  title="Stassh | Private SSH Stash"
+  description="A private SSH terminal user interface. Local-first host management, trust-aware SSH, and optional local encryption."
+>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="brand-hero">
+          <img class="brand-logo" src="/logo.svg" alt="Stassh" />
+          <a
+            class="brand-hero__github"
+            href="https://github.com/getstassh/stassh"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon icon={githubIcon} class="icon-inline icon-brand" />
+          </a>
+        </div>
+        <div class="hero-copy__center stack">
+          <h1>SSH access, without the friction.</h1>
+          <p class="hero-lead">Rust based TUI app for managing SSH hosts.</p>
+          <InstallWidget />
+        </div>
+      </div>
+
+      <div class="hero-shot" aria-label="Stassh product overview">
+        <img
+          src="/combined.png"
+          alt="Combined Stassh product screenshots showing dashboard, prompts, and live terminal sessions"
+        />
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <ShellFrame>
+        <SectionHeading title="Features" />
+        <div class="section-grid">
+          <div class="feature-grid">
+            <article class="feature-card info-card feature-card--keyboard">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={Keyboard} class="icon-accent" />
+                  Keyboard-First Control
+                </h3>
+              </div>
+              <p class="card-copy">
+                Manage your SSH workflow from a fast terminal UI built for quick
+                navigation, host selection, and session launching without
+                leaving the keyboard.
+              </p>
+            </article>
+            <article class="feature-card info-card">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={Layers3} class="icon-accent" />All Hosts In One
+                  Place
+                </h3>
+              </div>
+              <p class="card-copy">
+                Keep all of your infrastructure organized in a single encrypted
+                place where you can browse, select, and connect to hosts from
+                one interface.
+              </p>
+            </article>
+            <article class="feature-card info-card">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={Radar} class="icon-accent" />Instant Reachability
+                  Checks
+                </h3>
+              </div>
+              <p class="card-copy">
+                See whether a host is unknown, reachable, or unreachable before
+                connecting so you can act faster and avoid wasted SSH attempts.
+              </p>
+            </article>
+            <article class="feature-card info-card">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={MonitorSmartphone} class="icon-accent" />Built-In
+                  Live SSH Sessions
+                </h3>
+              </div>
+              <p class="card-copy">
+                Launch interactive SSH sessions directly inside the app,
+                reducing context switching and keeping your workflow focused.
+              </p>
+            </article>
+            <article class="feature-card info-card">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={ShieldCheck} class="icon-accent" />Safer Host
+                  Verification
+                </h3>
+              </div>
+              <p class="card-copy">
+                Review host key fingerprints and trust prompts before connecting
+                so you can verify identity instead of blindly accepting new
+                hosts.
+              </p>
+            </article>
+            <article class="feature-card info-card">
+              <div class="card-top">
+                <h3 class="card-title">
+                  <Icon icon={House} class="icon-accent" />Local-First Workflow
+                </h3>
+              </div>
+              <p class="card-copy">
+                Run everything locally with a responsive TUI experience that
+                keeps host management close to your terminal and under your
+                control.
+              </p>
+            </article>
+          </div>
+        </div>
+      </ShellFrame>
+    </section>
+    <br />
+    <section class="section" id="trust">
+      <ShellFrame>
+        <SectionHeading title="Security" />
+        <div class="trust-list">
+          <div>
+            <h3 class="card-title">
+              <Icon icon={LockKeyhole} class="icon-accent" />Encrypted Local
+              Data
+            </h3>
+            <p class="card-copy">
+              Protect stored data with optional local database encryption using
+              Argon2 and AES-256-GCM for strong at-rest security.
+            </p>
+          </div>
+          <div>
+            <h3 class="card-title">
+              <Icon icon={Fingerprint} class="icon-accent" />Host Key
+              Fingerprint Checks
+            </h3>
+            <p class="card-copy">
+              Verify server identities through fingerprint prompts to help
+              prevent connecting to the wrong machine or accepting spoofed
+              hosts.
+            </p>
+          </div>
+          <div>
+            <h3 class="card-title">
+              <Icon icon={ShieldCheck} class="icon-accent" />User-Controlled
+              Trust
+            </h3>
+            <p class="card-copy">
+              Decide when to trust a host and when to reject it, giving you
+              explicit control over connection safety instead of hidden
+              automation.
+            </p>
+          </div>
+        </div>
+      </ShellFrame>
+    </section>
+    <br />
+    <section class="section" id="screenshots">
+      <ShellFrame>
+        <SectionHeading title="Screenshots" />
+        <div class="section-grid">
+          <div class="screenshot-grid">
+            {
+              screenshots.map((screenshot) => (
+                <article
+                  class="screenshot-card"
+                  style={`--screenshot-card-background: ${screenshot.cardBackground};`}
+                >
+                  <div
+                    class="screenshot-card__media"
+                    style={`--screenshot-crop-inline: ${screenshot.cropInline}px; --screenshot-crop-block: ${screenshot.cropBlock}px;`}
+                  >
+                    <img src={screenshot.src} alt={screenshot.alt} />
+                  </div>
+                  <div class="screenshot-card__copy">
+                    <h3>{screenshot.title}</h3>
+                    <p class="card-copy">{screenshot.caption}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </ShellFrame>
+    </section>
+
+    <footer class="footer muted">
+      <div class="footer-meta">
+        <span>
+          Built by <a
+            class="footer-author-tag"
+            href="https://bylazar.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Lazar / bylazar.com
+          </a>
+        </span>
+        <a
+          class="footer-github"
+          href="https://github.com/getstassh"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub org"
+        >
+          <Icon icon={githubIcon} class="icon-inline icon-brand" />
+        </a>
+      </div>
+    </footer>
+  </main>
+</Layout>

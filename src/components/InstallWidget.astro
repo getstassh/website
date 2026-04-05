@@ -1,0 +1,159 @@
+---
+import icons from "lucide-static"
+import HostCountWidget from "./HostCountWidget.astro"
+import Icon from "./Icon.astro"
+
+const { Copy, Check, X } = icons
+
+const installMethods = [
+  {
+    key: "curl",
+    label: "curl",
+    command: "curl -fsSL /install.sh | sh",
+  },
+  {
+    key: "cargo",
+    label: "cargo",
+    command: "cargo install",
+  },
+
+  {
+    key: "github",
+    label: "github",
+    command: "git clone https://github.com/getstassh/stassh.git",
+  },
+]
+
+const initialMethod = installMethods[0]
+---
+
+<div class="install-widget" data-install-widget data-copy-state="idle">
+  <div class="install-widget__header">
+    <div
+      class="install-widget__tabs"
+      role="tablist"
+      aria-label="Install methods"
+    >
+      {
+        installMethods.map((method, index) => (
+          <button
+            type="button"
+            class="install-widget__tab"
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            data-install-tab
+            data-key={method.key}
+          >
+            {method.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="install-widget__surface">
+    <code class="install-widget__command" data-install-command>
+      {initialMethod.command}
+    </code>
+    <button
+      type="button"
+      class="install-widget__copy"
+      aria-label="Copy install command"
+      title="Copy install command"
+      data-install-copy
+    >
+      <span
+        class="install-widget__copy-icon install-widget__copy-icon--default"
+        data-copy-default
+      >
+        <Icon icon={Copy} class="icon-inline" />
+      </span>
+      <span
+        class="install-widget__copy-icon install-widget__copy-icon--success"
+        data-copy-success
+      >
+        <Icon icon={Check} class="icon-inline" />
+      </span>
+      <span
+        class="install-widget__copy-icon install-widget__copy-icon--error"
+        data-copy-error
+      >
+        <Icon icon={X} class="icon-inline" />
+      </span>
+    </button>
+  </div>
+
+  <HostCountWidget />
+
+  <script
+    type="application/json"
+    data-install-methods
+    set:html={JSON.stringify(installMethods)}
+  />
+  <script is:inline>
+    const widgets = document.querySelectorAll("[data-install-widget]")
+
+    widgets.forEach((widget) => {
+      const methodsNode = widget.querySelector("[data-install-methods]")
+      const commandNode = widget.querySelector("[data-install-command]")
+      const copyButton = widget.querySelector("[data-install-copy]")
+      const tabs = widget.querySelectorAll("[data-install-tab]")
+
+      if (!methodsNode || !commandNode || !copyButton || tabs.length === 0) {
+        return
+      }
+
+      const methods = JSON.parse(methodsNode.textContent || "[]")
+      let copyTimeout
+
+      const syncCurlCommand = (command) =>
+        command.replace("/install.sh", `${window.location.origin}/install.sh`)
+
+      const renderMethod = (methodKey) => {
+        const nextMethod = methods.find((method) => method.key === methodKey)
+
+        if (!nextMethod) {
+          return
+        }
+
+        commandNode.textContent =
+          nextMethod.key === "curl"
+            ? syncCurlCommand(nextMethod.command)
+            : nextMethod.command
+
+        tabs.forEach((tab) => {
+          tab.setAttribute(
+            "aria-selected",
+            tab.dataset.key === methodKey ? "true" : "false",
+          )
+        })
+
+        window.clearTimeout(copyTimeout)
+        widget.dataset.copyState = "idle"
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => renderMethod(tab.dataset.key))
+      })
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(commandNode.textContent || "")
+          widget.dataset.copyState = "copied"
+          window.clearTimeout(copyTimeout)
+          copyTimeout = window.setTimeout(() => {
+            widget.dataset.copyState = "idle"
+          }, 1800)
+        } catch {
+          widget.dataset.copyState = "error"
+          window.clearTimeout(copyTimeout)
+          copyTimeout = window.setTimeout(() => {
+            widget.dataset.copyState = "idle"
+          }, 1800)
+        }
+      })
+
+      renderMethod(methods[0]?.key)
+    })
+  </script>
+</div>

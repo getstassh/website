@@ -1,0 +1,40 @@
+<div class="host-count-widget">
+  <p class="host-count-widget__copy">
+    serving
+    <strong id="host-count">{String(0).padStart(4, "0")}</strong>
+    hosts
+  </p>
+
+  <script is:inline>
+    function formatHostCount(value) {
+      const rounded = Math.max(0, Math.round(value))
+      return rounded < 10000
+        ? String(rounded).padStart(4, "0")
+        : String(rounded)
+    }
+
+    async function loadHostCount() {
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, 500)
+      })
+
+      return 500
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const countNode = document.getElementById("host-count")
+      let current = 0
+      const target = await loadHostCount()
+
+      while (current < target) {
+        current = Math.min(current + Math.ceil((target - current) / 4), target)
+        countNode.textContent = formatHostCount(current)
+        const error = target - current
+        const delay = 50 + Math.round((error / target) * 100)
+        await new Promise((resolve) => {
+          window.setTimeout(resolve, delay)
+        })
+      }
+    })
+  </script>
+</div>
