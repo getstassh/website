@@ -210,6 +210,25 @@ a.button {
   text-transform: uppercase;
 }
 
+.hero-word-squiggle {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-word-squiggle::after {
+  content: "";
+  position: absolute;
+  left: 0.06em;
+  width: calc(100% + 0.1em);
+  bottom: -0.18em;
+  height: 0.22em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 18' preserveAspectRatio='none'%3E%3Cpath d='M2 7 L18 11 L34 7 L50 11 L66 7 L82 11 L98 7 L114 11 L130 7 L146 11 L162 7 L178 11 L194 7 L210 11 L226 7' fill='none' stroke='%23e3903e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat left bottom / 100% 100%;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
 .brand-hero {
   display: flex;
   align-items: center;
