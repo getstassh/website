@@ -540,9 +540,16 @@ a.button {
 }
 
 .hero-shot img,
-.screenshot-card img {
+.hero-shot video,
+.screenshot-card img,
+.screenshot-card video {
   width: 100%;
   height: auto;
+}
+
+.hero-shot video {
+  display: block;
+  border: 1px solid var(--border);
 }
 
 .screenshot-card__media {

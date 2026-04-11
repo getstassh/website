@@ -93,6 +93,11 @@ const screenshots = [
       "The interface stays explicit about in-flight connection state instead of hiding it.",
   },
 ]
+
+const installDemo = {
+  mp4: "/imgs/stassh.mp4",
+  gif: "/imgs/stassh.gif",
+}
 ---
 
 <Layout
@@ -125,10 +130,13 @@ const screenshots = [
       </div>
 
       <div class="hero-shot" aria-label="Stassh product overview">
-        <img
-          src="/combined.png"
-          alt="Combined Stassh product screenshots showing dashboard, prompts, and live terminal sessions"
-        />
+        <video autoplay muted loop playsinline poster={installDemo.gif}>
+          <source src={installDemo.mp4} type="video/mp4" />
+          <img
+            src={installDemo.gif}
+            alt="Stassh install demo showing dashboard, prompts, and live terminal sessions"
+          />
+        </video>
       </div>
     </section>
 
