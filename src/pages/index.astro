@@ -26,8 +26,10 @@ const screenshots = [
     src: "/imgs/dashboard.png",
     alt: "Stassh dashboard overview",
     title: "Dashboard overview",
-    cropInline: 6,
-    cropBlock: 14,
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
     cardBackground: "#161b21",
     caption:
       "Scan host state, auth mode, and readiness from the dashboard before opening a connection.",
@@ -36,8 +38,10 @@ const screenshots = [
     src: "/imgs/dashboard-with-add-host-popup.png",
     alt: "Stassh dashboard with add host popup open",
     title: "Add hosts in place",
-    cropInline: 6,
-    cropBlock: 14,
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
     cardBackground: "#161b21",
     caption:
       "Create a new target with support for both key and password authentication.",
@@ -46,9 +50,11 @@ const screenshots = [
     src: "/imgs/host-key-verification-popup.png",
     alt: "Stassh host key verification popup",
     title: "Verify trust explicitly",
-    cropInline: 6,
-    cropBlock: 14,
-    cardBackground: "#0a0c0e",
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
+    cardBackground: "black",
     caption:
       "New or changed host fingerprints have to be verified before trust is stored locally.",
   },
@@ -56,9 +62,11 @@ const screenshots = [
     src: "/imgs/opened-connection-with-quick-switcher-popup.png",
     alt: "Stassh live SSH connection with quick switcher popup",
     title: "Jump between sessions",
-    cropInline: 6,
-    cropBlock: 14,
-    cardBackground: "#0a0c0e",
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
+    cardBackground: "black",
     caption:
       "Keep multiple connections opened and switch context with no friction.",
   },
@@ -66,9 +74,11 @@ const screenshots = [
     src: "/imgs/opened-connection.png",
     alt: "Stassh live SSH connection view",
     title: "Stay in the shell",
-    cropInline: 6,
-    cropBlock: 14,
-    cardBackground: "#0a0c0e",
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
+    cardBackground: "black",
     caption:
       "Interactive sessions keep resize, paste, and disconnect handling inside the app.",
   },
@@ -76,8 +86,10 @@ const screenshots = [
     src: "/imgs/page-with-logo-that-asks-for-my-password.png",
     alt: "Stassh password prompt screen with logo",
     title: "Protected local access",
-    cropInline: 6,
-    cropBlock: 14,
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
     cardBackground: "#101418",
     caption:
       "All sensitive data is encrypted and stored locally, preventing exposed credentials.",
@@ -86,8 +98,10 @@ const screenshots = [
     src: "/imgs/waiting-for-connection-page.png",
     alt: "Stassh waiting for connection screen",
     title: "Connection status feedback",
-    cropInline: 6,
-    cropBlock: 14,
+    cropTop: 13,
+    cropBottom: 16,
+    cropLeft: 8,
+    cropRight: 11,
     cardBackground: "#161b21",
     caption:
       "The interface stays explicit about in-flight connection state instead of hiding it.",
@@ -278,7 +292,7 @@ const installDemo = {
                 >
                   <div
                     class="screenshot-card__media"
-                    style={`--screenshot-crop-inline: ${screenshot.cropInline}px; --screenshot-crop-block: ${screenshot.cropBlock}px;`}
+                    style={`--screenshot-crop-top: ${screenshot.cropTop}px; --screenshot-crop-bottom: ${screenshot.cropBottom}px; --screenshot-crop-left: ${screenshot.cropLeft}px; --screenshot-crop-right: ${screenshot.cropRight}px;`}
                   >
                     <img src={screenshot.src} alt={screenshot.alt} />
                   </div>
